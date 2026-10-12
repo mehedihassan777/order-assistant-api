@@ -1,6 +1,25 @@
-@OrderAssistant.Api_HostAddress = http://localhost:5210
+@host = http://localhost:5210
 
-GET {{OrderAssistant.Api_HostAddress}}/weatherforecast/
+GET {{host}}/health
+
+###
+
+GET {{host}}/api/orders?page=1&pageSize=20
+Accept: application/json
+
+###
+
+GET {{host}}/api/orders?q=ord-1000&status=Shipped
+Accept: application/json
+
+###
+
+GET {{host}}/api/orders/1
+Accept: application/json
+
+###
+
+GET {{host}}/api/inventory/SKU-1001
 Accept: application/json
 
 ###

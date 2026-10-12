@@ -213,7 +213,7 @@ namespace OrderAssistant.Api.Migrations
                     b.HasOne("OrderAssistant.Api.Entities.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -230,7 +230,7 @@ namespace OrderAssistant.Api.Migrations
                     b.HasOne("OrderAssistant.Api.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Order");

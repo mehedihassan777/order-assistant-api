@@ -29,5 +29,12 @@ public class OmsDb(DbContextOptions<OmsDb> options) : DbContext(options)
         b.Entity<Order>().Property(o => o.Status).HasConversion<string>();
 
         b.Entity<OrderLine>().Property(l => l.UnitPrice).HasPrecision(12, 2);
+
+        // Order history must never disappear as a side effect of deleting a customer or product.
+        // Lines still cascade with their own order.
+        b.Entity<Order>().HasOne(o => o.Customer).WithMany(c => c.Orders)
+            .OnDelete(DeleteBehavior.Restrict);
+        b.Entity<OrderLine>().HasOne(l => l.Product).WithMany()
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
